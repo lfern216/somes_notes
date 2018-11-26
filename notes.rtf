@@ -1,0 +1,87 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww20040\viewh9820\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs40 \cf0 \
+download the 'oracle sql developer' or mysqlworkbench to manage the database\
+\
+\
+normal status: localhost:8080/\
+administration for glasshfish:  localhost:4848/\
+\
+\
+to download spring framework:\
+		(download a zip version)\
+		-https://repo.spring.io/release/org/springframework/spring/\
+\
+		-download the latest version of commons-logging-2..... jar\
+		(http://commons.apache.org/proper/commons-logging/download_logging.cgi)\
+\
+	(In eclipse, create a new user library and add external library with all these jars)	\
+\
+\
+JDBC:\
+\
+	-download the jdbc driver for mysql in mysql.com/products/connector\
+\
+\
+		Steps:\
+		1) Create connection\
+      Connection conn = DriverManager.getConnection(""jdbc:mysql://localhost:3306/database_name","username","password")\
+\
+		2) Create Statement\
+		Statement stat = conn.createStatement();\
+\
+		3) Execute Query\
+		ResultSet result = stat.executeQuery("SELECT * FROM employee_table");\
+\
+		4) Process the result set\
+		while(result.next())\{\
+			//you can get info from db by doing:\
+			some_array.add(result.getString("first_name"));\
+		\}\
+\
+public static Connection getConnection() throws Exception\{\
+\
+		try\{\
+\
+			String driver = "com.mysql.jdbc.Driver";\
+			String url = "jdbc:mysql://localhost:3306/database_name"\
+			String username = "javad"\
+			String password = "123"\
+			Class.forName(driver);\
+			\
+			Connection conn = DriverManager.getConnection(url,username,password)\
+			return conn;\
+		\}catch(Exception e)\{\}\
+\}\
+\
+Prepared Statements:\
+\
+PreparedStament stat = conn.prepareStatement("SELECT * FROM employees WHERE\
+					SALARY > ? AND department = ?");\
+\
+		stat.setDouble(1, 8000);\
+		stat.setString(2, "Legal");\
+		(the program will replace the ? for 8000 and the last ? for Legal\
+\
+\
+To insert query:\
+			String sql = "insert into employee_table " \
+			+ " (last_name, first_name, email) "\
+			+ " values ('Brown', 'David', 'david@gj.com') ";\
+\
+	followed by stat.executeUpdate(sql);\
+\
+\
+To Update query:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 			String sql = "update employee_table " \
+			+ " set email='demo@gdhgh' "\
+			+ " where id=9";\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 			 \
+		}
