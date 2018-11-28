@@ -116,3 +116,31 @@ To Update query:
 	
 	Note: welcomefile is used to set the default file. So localhost/8080 would display the index.xhtml.
 	
+	
+	
+	Ex 1.3:
+	
+	
+	public class MyWebAppInitializer implements WebApplicationInitializer {
+
+	public void onStartup(ServletContext container) {
+	
+		// Create the 'root' Spring application context
+		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+		rootContext.register(SpringConfiguration.class);
+
+		// Manage the lifecycle of the root application context
+		container.addListener(new ContextLoaderListener(rootContext));
+	}
+}
+	
+	import org.springframework.context.annotation.ComponentScan;
+	import org.springframework.context.annotation.Configuration;
+	
+	@Configuration
+	@ComponentScan
+	
+	public class SpringConfiguration{
+	
+	
+	}
