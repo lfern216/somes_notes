@@ -170,8 +170,14 @@ To Update query:
 	   
 	   @ManagedProperty(#{helloSpringService}") //almost the same as the name of the class 'HelloSpringService'
 	   					   //by default a spring bean name should have a lowercase letter at the front
+		private HelloSpringService helloSpringService;
+		
 		public String showHello(){
-			return "hello from managed bean";
+			return helloSpringService.sayHello();
+		}
+		
+		public void setHelloSpringService(HelloSpringService helloSpringService){
+			this.helloSpringService = helloSpringService;
 		}
 	   }
 	   
@@ -188,3 +194,36 @@ To Update query:
 	   @ManagedProperty(#{springBean}")...
 	   
 	   
+	   Ex 1.4:
+	   
+	   In example above, you could have Component and Autowired instead andwill work the same way. The only difference is
+	   ManagedBean is created by JSF runtime and Component is Spring. ManagedBean is created for each request so it has a request scope
+	   Component instead uses singleton. 
+	   
+	   @Scope("request")
+	   @Component
+	   public class HelloController {
+	   
+	   @Autowired
+	   private HelloSpringService helloSpringService;
+		
+	public String showHello(){
+		return helloSpringService.sayHello();
+	}
+		
+	public void setHelloSpringService(HelloSpringService helloSpringService){
+		this.helloSpringService = helloSpringService;
+	}
+	
+	
+	   Ex 1.5:
+	   We can avoid the setter setHelloSpringService in HelloController.java class by using the Lombok Library and
+	   adding these annotations
+	   
+	   @Getter
+	   @Setter
+	   @ManagedBean 
+	   .........
+	   
+	   
+	     Ex 1.6:
