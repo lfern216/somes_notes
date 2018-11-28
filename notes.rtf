@@ -128,6 +128,9 @@ To Update query:
 		// Create the 'root' Spring application context
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		rootContext.register(SpringConfiguration.class);
+		
+		//this class will create this SpringConfiguration class which contains this annotation which specifies 
+		//that SpringConfiguration.java configures Spring beans.
 
 		// Manage the lifecycle of the root application context
 		container.addListener(new ContextLoaderListener(rootContext));
@@ -137,6 +140,11 @@ To Update query:
 	import org.springframework.context.annotation.ComponentScan;
 	import org.springframework.context.annotation.Configuration;
 	
+	//Note: componentsScan can have value like componentsScan(value) which specifies which package or sub package would be
+	//scanned. If value is not specified, then it would scan all the packages. 
+	
+	In sitemonitoring.service package
+	
 	@Configuration
 	@ComponentScan
 	
@@ -144,3 +152,39 @@ To Update query:
 	
 	
 	}
+	import org.springframework.stereotype.Service;
+
+	In sitemonitoring.service package:
+	
+	@Service
+	public class HelloSpringService {
+
+	public String sayHello() {
+		return "hello from spring service";
+	}
+	}
+	
+	In Controller package
+	 @ManagedBean
+	   public class HelloController {
+	   
+	   @ManagedProperty(#{helloSpringService}") //almost the same as the name of the class 'HelloSpringService'
+	   					   //by default a spring bean name should have a lowercase letter at the front
+		public String showHello(){
+			return "hello from managed bean";
+		}
+	   }
+	   
+	   To change the default you have to specify in HelloSpringService.java as follows:
+	   In this case, HelloController.java should contain the name as well.
+	   
+	   @Service ("springBean")
+	   public class HelloSpringService {
+	   ...}
+	   
+	   @ManagedBean
+	   public class HelloController {
+	   
+	   @ManagedProperty(#{springBean}")...
+	   
+	   
