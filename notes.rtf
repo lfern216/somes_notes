@@ -76,3 +76,43 @@ To Update query:
 			+ " where id=9";
 			 
 		
+		
+		
+	------------------- JSF ----------------------------
+	
+	Ex: 1.1:
+	
+	     @ManagedBean
+	   public class Hello.Controller {
+		public String showHello(){
+			return "hello from managed bean";
+		}
+	   }
+	   
+	   
+	   In index.xhtml
+	   <html> 
+	   	(all imports)
+			
+		<h:head>
+		</h:head>
+		<h:body>
+		     #{helloController.showHello()}
+		</h:body>
+	   </html> 
+	
+	Note: In @ManagedBean, if you dont specify the name as follows like this @ManagedBean(name="...)" then
+	the name is the same as the class but having the first letter as LOWERCASE. This is why, we didn't specify 
+	and wrote #{helloController.showHello()}
+	
+	
+	
+	Ex 1.2: 
+	
+	
+	<welcome-file-list>
+	     <welcome-file> index.xhtml> </welcome-file>
+	</welcome-file-list>
+	
+	Note: welcomefile is used to set the default file. So localhost/8080 would display the index.xhtml.
+	
